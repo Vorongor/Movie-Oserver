@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchTrendingMovies } from '../Fetch/Fetch';
+import { fetchTrendingMovies } from '../components/Fetch/Fetch';
 
 const TrendList = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
