@@ -1,9 +1,12 @@
+import SearchForm from 'components/SerchForm/SearchForm';
 import React from 'react';
-const SearchList = () => {
-    return (
-        <div>
-           <h3>SearchList</h3>
-        </div>
-    )
+import MovieList from 'components/SearchList/SearchedList';
+const SearchList = ({ handleSubmit, text, query }) => {
+  return (
+    <div>
+      <SearchForm onSubmit={handleSubmit} />
+      {text && <MovieList text={text} query={query}/>}
+    </div>
+  );
 };
 export default SearchList;

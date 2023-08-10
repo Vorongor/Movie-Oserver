@@ -39,9 +39,26 @@ export const handleSearch = async query => {
         },
       }
     );
-    return response.data;
+    return response.data.results;
   } catch (error) {
     console.error('Error searching movies:', error);
+    throw error;
+  }
+};
+
+export const fetchMovieDetails = async movieId => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/movie/${movieId}`,
+      {
+        params: {
+          api_key: API_KEY,
+        },
+      }
+    );
+    return response.data; // Повертаємо отриману відповідь
+  } catch (error) {
+    console.error('Error fetching movie details:', error);
     throw error;
   }
 };

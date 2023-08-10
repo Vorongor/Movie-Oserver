@@ -1,0 +1,23 @@
+.form {
+    padding: 15px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 30px;
+}
+.input {
+  box-sizing: border-box;
+  min-width: 260px;
+  min-height: 40px;
+  border-radius: 30px;
+  padding: 8px;
+}
+.btn {
+  min-width: 70px;
+  min-height: 40px;
+  box-sizing: border-box;
+  border-radius: 30px;
+  border: none;
+  background-color: blue;
+  color: white;
+}
