@@ -1,21 +1,22 @@
-import React, { useState, } from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, useSearchParams } from 'react-router-dom';
 
-import TrendList from '../pages/TrendList';
-import SearchList from '../pages/SearchList';
-import NotFound from '../pages/NotFound';
-import Header from './Header/Header';
-import SearchForm from './SerchForm/SearchForm';
-// import { handleSearch } from '../Fetch/Fetch';
+const TrendList = React.lazy(() => import('../pages/TrendList'));
+const SearchList = React.lazy(() => import('../pages/SearchList'));
+const NotFound = React.lazy(() => import('../pages/NotFound'));
+const Header = React.lazy(() => import('./Header/Header'));
+const MovieCard = React.lazy(() => import('./MovieCard/MovieCard'));
+const Cast = React.lazy(() => import('./Cast/Cast'));
+const Revievs = React.lazy(() => import('./Revievs/Revievs'));
 
 export const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState();
 
-  const updateQueryString = query => {
-    const nextParams = query !== '' ? { query } : {};
-    setSearchParams(nextParams);
-  };
+  // const updateQueryString = query => {
+  //   const nextParams = query !== '' ? { query } : {};
+  //   setSearchParams(nextParams);
+  // };
 
   const onSubmit = e => {
     e.preventDefault();
@@ -26,22 +27,28 @@ export const App = () => {
   };
 
   return (
-    <Routes>
-      <Route path="/goit-react-hw-05-movies" element={<Header />}>
-        <Route index element={<TrendList />} />
-      </Route>
-      <Route path="/goit-react-hw-05-movies" element={<Header />}>
-        <Route path="trend-list" element={<TrendList />} />
-      </Route>
-      <Route path="/goit-react-hw-05-movies" element={<Header />}>
-        <Route
-          path="search-list"
-          element={<SearchList text={search} query={searchParams} handleSubmit={onSubmit} />}
-        />
-      </Route>
-      <Route path="/goit-react-hw-05-movies/*" element={<Header />}>
-        <Route index element={<NotFound />} />
-      </Route>
-    </Routes>
+    <React.Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path="/goit-react-hw-05-movies" element={<Header />}>
+          <Route index element={<TrendList />} />
+          <Route path="trend-list" element={<TrendList />} />
+          <Route
+            path="search-list"
+            element={
+              <SearchList
+                text={search}
+                query={searchParams}
+                handleSubmit={onSubmit}
+              />
+            }
+          />
+          <Route path="movie" element={<MovieCard />}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Revievs />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </React.Suspense>
   );
 };

@@ -1,14 +1,16 @@
-import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, Outlet, useSearchParams } from 'react-router-dom';
 import { fetchMovieDetails } from '../Fetch/Fetch';
 
-const MovieCard = ({ movieID }) => {
+const MovieCard = () => {
+  const [searchParams] = useSearchParams();
   const [moviesById, setMoviesById] = useState(null);
+  const movieID = searchParams.get('id');
 
   useEffect(() => {
-    const fetchDetails = async movieID => {
+    const fetchDetails = async () => {
       try {
-        const details = await fetchMovieDetails(movieID); // Приклад ID фільму
+        const details = await fetchMovieDetails(movieID);
         setMoviesById(details);
       } catch (error) {
         console.error('Error fetching movie details:', error);
@@ -16,14 +18,13 @@ const MovieCard = ({ movieID }) => {
     };
 
     fetchDetails();
-  }, [moviesById]);
+  }, [movieID]);
 
   if (!moviesById) {
     return <div>Loading...</div>;
   }
 
   const getImageUrl = (path, size = 'w500') => {
-    // Базовий URL для зображень
     const baseUrl = 'https://image.tmdb.org/t/p/';
     return `${baseUrl}${size}/${path}`;
   };
@@ -31,10 +32,7 @@ const MovieCard = ({ movieID }) => {
   return (
     <div>
       <div>
-        <img
-          src={getImageUrl(moviesById.poster_path)} // Отримуємо URL постера
-          alt={moviesById.title}
-        />
+        <img src={getImageUrl(moviesById.poster_path)} alt={moviesById.title} />
         <h4>{moviesById.title}</h4>
         <p>{moviesById.vote_average}</p>
         <h4>Overviev</h4>
@@ -44,8 +42,8 @@ const MovieCard = ({ movieID }) => {
       </div>
       <div>
         <p></p>
-        <Link></Link>
-        <Link></Link>
+        <Link to={`cast?id=${movieID}`}>Cast</Link>
+        <Link to={`reviews?id=${movieID}`}>Revievs</Link>
       </div>
       <div>
         <Outlet />

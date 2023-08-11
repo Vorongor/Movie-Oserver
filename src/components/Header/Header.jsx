@@ -1,20 +1,13 @@
-import { NavLink , Outlet } from 'react-router-dom';
+import { Link , Outlet } from 'react-router-dom';
 import style from './Header.module.css';
-// import styled from "styled-components";
-const StyledLink = style(NavLink)`
-  color: black;
 
-  &.active {
-    color: orange;
-  }
-`;
 const Header = () => {
   return (
     <div className={style.mainBox}>
       <header className={style.headContainer}>
         <nav className={style.nav}>
-          <StyledLink  className={style.link} to="/goit-react-hw-05-movies/trend-list">Trend List</StyledLink>
-          <StyledLink  className={style.link} to="/goit-react-hw-05-movies/search-list">Search List</StyledLink>
+          <Link  className={style.link} to="/goit-react-hw-05-movies/trend-list">Trend List</Link>
+          <Link  className={style.link} to="/goit-react-hw-05-movies/search-list">Search List</Link>
         </nav>
       </header>
       <Outlet />

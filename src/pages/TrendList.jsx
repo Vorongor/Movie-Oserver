@@ -18,10 +18,10 @@ const TrendList = () => {
     fetchTrending();
   }, []);
 
-  const getImageUrl = (path, size = 'w500') => {
-    const baseUrl = 'https://image.tmdb.org/t/p/';
-    return `${baseUrl}${size}/${path}`;
-  };
+  // const getImageUrl = (path, size = 'w500') => {
+  //   const baseUrl = 'https://image.tmdb.org/t/p/';
+  //   return `${baseUrl}${size}/${path}`;
+  // };
 
   return (
     <div>
@@ -29,7 +29,7 @@ const TrendList = () => {
       <ul>
         {trendingMovies.map(movie => (
           <li key={movie.id}>
-            <Link to={`${movie.id}`}>
+            <Link to={`/goit-react-hw-05-movies/movie?id=${movie.id}`}>
               <div>
                 <p>{movie.title}</p>
               </div>

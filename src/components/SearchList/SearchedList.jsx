@@ -16,7 +16,7 @@ const MovieList = ({ query, text }) => {
     };
 
     fetchMovies();
-  }, [SearhMovies]);
+  }, [query, SearhMovies]);
 
   return (
     <div>
@@ -25,7 +25,9 @@ const MovieList = ({ query, text }) => {
         <ul>
           {SearhMovies.map(movie => (
             <li key={movie.id}>
-              <Link to={`${movie.id}`}>{movie.title}</Link>
+              <Link to={`/goit-react-hw-05-movies/movie?id=${movie.id}`}>
+                {movie.title}
+              </Link>
             </li>
           ))}
         </ul>
