@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Outlet, useSearchParams } from 'react-router-dom';
 import { fetchMovieDetails } from '../Fetch/Fetch';
+import style from './MovieCard.module.css';
 
 const MovieCard = () => {
   const [searchParams] = useSearchParams();
@@ -30,20 +31,34 @@ const MovieCard = () => {
   };
 
   return (
-    <div>
-      <div>
-        <img src={getImageUrl(moviesById.poster_path)} alt={moviesById.title} />
-        <h4>{moviesById.title}</h4>
-        <p>{moviesById.vote_average}</p>
-        <h4>Overviev</h4>
-        <p>{moviesById.overview}</p>
-        <h4>Genres</h4>
-        <p>{moviesById.genres.map(genre => genre.name).join(', ')}</p>
+    <div className={style.mainBox}>
+      <div className={style.movieBox}>
+        <img
+          className={style.img}
+          src={getImageUrl(moviesById.poster_path)}
+          alt={moviesById.title}
+        />
+        <div className={style.textBox}>
+          <h4>{moviesById.title}</h4>
+          <p>User Score:{moviesById.vote_average}</p>
+          <p>
+            <span className={style.topic}> Overviev:</span>
+            <br /> {moviesById.overview}
+          </p>
+          <p>
+            <span className={style.topic}>Genres</span>
+            <br />
+            {moviesById.genres.map(genre => genre.name).join(', ')}
+          </p>
+        </div>
       </div>
-      <div>
-        <p></p>
-        <Link to={`cast?id=${movieID}`}>Cast</Link>
-        <Link to={`reviews?id=${movieID}`}>Revievs</Link>
+      <div className={style.linkBox}>
+        <Link className={style.link} to={`cast?id=${movieID}`}>
+          Cast
+        </Link>
+        <Link className={style.link} to={`reviews?id=${movieID}`}>
+          Revievs
+        </Link>
       </div>
       <div>
         <Outlet />

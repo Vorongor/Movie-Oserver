@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { fetchMovieCredits } from 'components/Fetch/Fetch';
+import { fetchMovieCredits, fetchActorDetails } from 'components/Fetch/Fetch';
 import { useSearchParams } from 'react-router-dom';
+import style from './Cast.module.css';
 
 const Cast = () => {
   const [searchParams] = useSearchParams();
@@ -23,12 +24,23 @@ const Cast = () => {
     return <div>Loading...</div>;
   }
   return (
-    <div>
-      <h3>Cast:</h3>
-      <ul>
+    <div className={style.tumb}>
+      <h3 className={style.cast}>Cast:</h3>
+      <ul className={style.list}>
         {cast.map(actor => (
-          <li key={actor.id}>
-            {actor.name} as {actor.character}
+          <li key={actor.id} className={style.item}>
+            <img
+              className={style.img}
+              src={
+                actor.profile_path
+                  ? `https://image.tmdb.org/t/p/w200/${actor.profile_path}`
+                  : 'no-image.jpg'
+              }
+              alt={actor.name}
+            />{' '}
+            <p className={style.name}>
+              {actor.name} as {actor.character}
+            </p>
           </li>
         ))}
       </ul>

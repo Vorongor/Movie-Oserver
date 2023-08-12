@@ -1,26 +1,44 @@
 .mainBox {
-    display: flex;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.movieBox {
+  width: 100%;
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+
+  gap: 20px;
+  border-bottom: 2px solid grey;
+}
+.img {
+  width: 35%;
+}
+.textBox {
+  display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
 }
-.headContainer {
+.topic {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+.linkBox {
   width: 100%;
-  height: 54px;
-  composes: mainBox;
-  flex-direction: row;
-  background-color: #8080802e;
-  border-bottom: solid 2px black;
-}
-.nav {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 40px;
   align-items: center;
-  height: 100%;
-  min-width: 320px;
+  gap: 30px;
+  padding: 12px;
+  background-color: #8080802e;
+  border-bottom: 2px solid grey;
 }
 .link {
   display: block;

@@ -13,11 +13,6 @@ export const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState();
 
-  // const updateQueryString = query => {
-  //   const nextParams = query !== '' ? { query } : {};
-  //   setSearchParams(nextParams);
-  // };
-
   const onSubmit = e => {
     e.preventDefault();
     const film = e.target.query.value;

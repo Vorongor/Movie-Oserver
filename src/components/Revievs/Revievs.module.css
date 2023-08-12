@@ -1,0 +1,27 @@
+.tumb {
+  padding: 12px;
+  max-width: 1200px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+.revievs {
+  font-size: 30px;
+}
+.list {
+  composes: tumb;
+  gap: 12px;
+  padding: 0;
+}
+.author {
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 8px;
+}
+.coment {
+  padding: 11px;
+  background-color: #80808070;
+  border-radius: 20px;
+}

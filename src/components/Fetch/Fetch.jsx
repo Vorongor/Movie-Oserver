@@ -80,6 +80,23 @@ export const fetchMovieCredits = async movieId => {
   }
 };
 
+export const fetchActorDetails = async actorId => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/person/${actorId}`,
+      {
+        params: {
+          api_key: API_KEY,
+        },
+      }
+    );
+    return response.data; // Повертаємо отриману відповідь
+  } catch (error) {
+    console.error('Error fetching actor details:', error);
+    throw error;
+  }
+};
+
 export const fetchMovieReviews = async movieId => {
   try {
     const response = await axios.get(
