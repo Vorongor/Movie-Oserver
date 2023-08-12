@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchMovieCredits, } from 'components/Fetch/Fetch';
+import { fetchMovieCredits } from 'components/Fetch/Fetch';
 import { useSearchParams } from 'react-router-dom';
 import style from './Cast.module.css';
 
