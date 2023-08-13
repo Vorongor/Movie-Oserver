@@ -21,7 +21,7 @@ const MovieList = ({ text }) => {
     };
 
     fetchMovies();
-  }, [savedQuery]);
+  }, [savedQuery, searchMovies]);
 
   const getImageUrl = (path, size = 'w500') => {
     const baseUrl = 'https://image.tmdb.org/t/p/';
