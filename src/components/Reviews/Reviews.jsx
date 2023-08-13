@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { fetchMovieReviews } from 'components/Fetch/Fetch';
 import { useSearchParams } from 'react-router-dom';
-import style from './Revievs.module.css';
+import style from './Reviews.module.css';
 
-const Revievs = () => {
+const Reviews = () => {
   const [searchParams] = useSearchParams();
   const [reviews, setReviews] = useState([]);
   const movieID = searchParams.get('id');
@@ -20,9 +20,10 @@ const Revievs = () => {
     fetchDetails();
   }, [movieID]);
 
-  if (!reviews) {
-    return <div>Loading...</div>;
+  if (reviews.length === 0) {
+    return <div className={style.sorry}>Sorry, there are still no reviews.</div>;
   }
+
   return (
     <div className={style.tumb}>
       <h3 className={style.revievs}>Reviews:</h3>
@@ -37,4 +38,4 @@ const Revievs = () => {
     </div>
   );
 };
-export default Revievs;
+export default Reviews;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, useSearchParams } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 const TrendList = React.lazy(() => import('../pages/TrendList'));
 const SearchList = React.lazy(() => import('../pages/SearchList'));
@@ -7,18 +7,17 @@ const NotFound = React.lazy(() => import('../pages/NotFound'));
 const Header = React.lazy(() => import('./Header/Header'));
 const MovieCard = React.lazy(() => import('./MovieCard/MovieCard'));
 const Cast = React.lazy(() => import('./Cast/Cast'));
-const Revievs = React.lazy(() => import('./Revievs/Revievs'));
+const Reviews = React.lazy(() => import('./Reviews/Reviews'));
 
 export const App = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState();
 
   const onSubmit = e => {
     e.preventDefault();
     const film = e.target.query.value;
-    const message = `Search results by request: ${film}`;
+    const message = `Search results by last request: ${film}`;
     setSearch(message);
-    setSearchParams(film);
+    localStorage.setItem('searchQuery', JSON.stringify(film));
   };
 
   return (
@@ -29,17 +28,11 @@ export const App = () => {
           <Route path="trend-list" element={<TrendList />} />
           <Route
             path="search-list"
-            element={
-              <SearchList
-                text={search}
-                query={searchParams}
-                handleSubmit={onSubmit}
-              />
-            }
+            element={<SearchList text={search} handleSubmit={onSubmit} />}
           />
           <Route path="movie" element={<MovieCard />}>
             <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Revievs />} />
+            <Route path="reviews" element={<Reviews />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Route>
