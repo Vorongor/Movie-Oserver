@@ -45,7 +45,7 @@ const Cast = () => {
                   ? `https://image.tmdb.org/t/p/w200/${actor.profile_path}`
                   : 'no-image.jpg'
               }
-              alt={`Image of ${actor.name} as ${actor.character}`} // Improved alt text
+              alt={`${actor.name} as ${actor.character}`}
             />{' '}
             <p className={style.name}>
               {actor.name} as {actor.character}

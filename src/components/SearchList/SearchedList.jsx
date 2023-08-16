@@ -31,7 +31,7 @@ const MovieList = () => {
 
   return (
     <div className={style.listBox}>
-      <h3 className={style.text}></h3>
+      <h3 className={style.text}>Result of Serch</h3>
       {searchMovies === null ? (
         <div>Loading...</div>
       ) : searchMovies.length > 0 ? (
