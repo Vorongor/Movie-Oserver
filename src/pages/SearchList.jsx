@@ -1,17 +1,14 @@
-import SearchForm from 'components/SerchForm/SearchForm';
 import React from 'react';
-import PropTypes from 'prop-types';
-import MovieList from 'components/SearchList/SearchedList';
-const SearchList = ({ handleSubmit, text }) => {
+import SearchForm from '../components/SerchForm/SearchForm';
+import MovieList from '../components/SearchList/SearchedList';
+
+const SearchList = () => {
   return (
     <div>
-      <SearchForm onSubmit={handleSubmit} />
-      {text && <MovieList text={text} />}
+      <SearchForm />
+      <MovieList />
     </div>
   );
 };
-SearchList.propTypes = {
-  handleSubmit: PropTypes.func.isRequired, 
-  text: PropTypes.string, 
-};
+
 export default SearchList;

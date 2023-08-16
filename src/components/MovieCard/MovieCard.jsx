@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Outlet, useSearchParams, useLocation  } from 'react-router-dom';
+import { Link, Outlet, useSearchParams, useLocation } from 'react-router-dom';
 import { fetchMovieDetails } from '../Fetch/Fetch';
 import style from './MovieCard.module.css';
 
@@ -7,9 +7,11 @@ const MovieCard = () => {
   const [searchParams] = useSearchParams();
   const [moviesById, setMoviesById] = useState(null);
   const movieID = searchParams.get('id');
+  const query = searchParams.get('query');
 
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? "/goit-react-hw-05-movies";
+  const backLinkHref =
+    location.state?.from ?? `/goit-react-hw-05-movies/trend-list`;
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -43,9 +45,9 @@ const MovieCard = () => {
         />
         <div className={style.textBox}>
           <h4>{moviesById.title}</h4>
-          <p>User Score:{moviesById.vote_average}</p>
+          <p>User Score: {moviesById.vote_average}</p>
           <p>
-            <span className={style.topic}> Overviev:</span>
+            <span className={style.topic}>Overview:</span>
             <br /> {moviesById.overview}
           </p>
           <p>
@@ -56,11 +58,27 @@ const MovieCard = () => {
         </div>
       </div>
       <div className={style.linkBox}>
-        <Link className={style.link} to={`cast?id=${movieID}`}>
+        <Link
+          className={style.link}
+          to={`cast?id=${movieID}`}
+          state={{
+            from: query
+              ? `/goit-react-hw-05-movies/search-list?query=${query}`
+              : `/goit-react-hw-05-movies/trend-list`,
+          }}
+        >
           Cast
         </Link>
-        <Link className={style.link} to={`reviews?id=${movieID}`}>
-          Revievs
+        <Link
+          className={style.link}
+          to={`reviews?id=${movieID}`}
+          state={{
+            from: query
+              ? `/goit-react-hw-05-movies/search-list?query=${query}`
+              : `/goit-react-hw-05-movies/trend-list`,
+          }}
+        >
+          Reviews
         </Link>
         <Link className={style.link} to={backLinkHref}>
           Back
@@ -72,4 +90,5 @@ const MovieCard = () => {
     </div>
   );
 };
+
 export default MovieCard;

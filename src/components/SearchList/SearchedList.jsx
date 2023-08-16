@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { handleSearch } from '../Fetch/Fetch';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import style from './SearchedList.module.css';
 
-const MovieList = ({ text }) => {
+const MovieList = () => {
   const [searchMovies, setSearchMovies] = useState(null);
-
-  const savedQuery = localStorage.getItem('searchQuery');
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const query = params.get('query');
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const result = await handleSearch(savedQuery);
+        const result = await handleSearch(query);
         setSearchMovies(result);
-        localStorage.setItem('saveList', JSON.stringify(searchMovies));
       } catch (error) {
-        console.error('Error fetching trending movies:', error);
+        console.error('Error fetching movies:', error);
       }
     };
 
-    fetchMovies();
-  }, [savedQuery, searchMovies]);
+    if (query) {
+      fetchMovies();
+    }
+  }, [query]);
 
   const getImageUrl = (path, size = 'w500') => {
     const baseUrl = 'https://image.tmdb.org/t/p/';
@@ -30,7 +31,7 @@ const MovieList = ({ text }) => {
 
   return (
     <div className={style.listBox}>
-      <h3 className={style.text}>{text}</h3>
+      <h3 className={style.text}></h3>
       {searchMovies === null ? (
         <div>Loading...</div>
       ) : searchMovies.length > 0 ? (
@@ -41,8 +42,8 @@ const MovieList = ({ text }) => {
                 <li className={style.item} key={movie.id}>
                   <Link
                     className={style.link}
-                    to={`/goit-react-hw-05-movies/movie?id=${movie.id}`}
-                    state={{ from: '/goit-react-hw-05-movies/search-list' }}
+                    to={`/goit-react-hw-05-movies/movie?query=${query}&id=${movie.id}`}
+                    state={{ from: `/goit-react-hw-05-movies/search-list?query=${query}` }}
                   >
                     <div className={style.movieBox}>
                       <img
@@ -64,9 +65,4 @@ const MovieList = ({ text }) => {
     </div>
   );
 };
-
-MovieList.propTypes = {
-  text: PropTypes.string.isRequired,
-};
-
 export default MovieList;

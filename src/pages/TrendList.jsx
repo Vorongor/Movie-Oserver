@@ -35,7 +35,7 @@ const TrendList = () => {
             >
               <div className={style.movieBox}>
                 <img className={style.img}
-                  src={getImageUrl(movie.poster_path)} // Отримуємо URL постера
+                  src={getImageUrl(movie.poster_path)}
                   alt={movie.title}
                 />
                 <p className={style.title}>{movie.title}</p>
