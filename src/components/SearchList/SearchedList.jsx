@@ -42,7 +42,7 @@ const MovieList = () => {
                 <li className={style.item} key={movie.id}>
                   <Link
                     className={style.link}
-                    to={`/goit-react-hw-05-movies/movie?query=${query}&id=${movie.id}`}
+                    to={`/goit-react-hw-05-movies/search-list/movie?query=${query}&id=${movie.id}`}
                     state={{ from: `/goit-react-hw-05-movies/search-list?query=${query}` }}
                   >
                     <div className={style.movieBox}>

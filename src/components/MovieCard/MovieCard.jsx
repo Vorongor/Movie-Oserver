@@ -7,12 +7,22 @@ const MovieCard = () => {
   const [searchParams] = useSearchParams();
   const [moviesById, setMoviesById] = useState(null);
   const movieID = searchParams.get('id');
-  const query = searchParams.get('query');
-
+  const searchQuery = searchParams.get('query');
   const location = useLocation();
-  const backLinkHref =
-    location.state?.from ?? `/goit-react-hw-05-movies/trend-list`;
 
+  function backWayFunc(currentPath) {
+    const pathSegments = currentPath.split('/');
+    const newPathSegments = pathSegments.slice(0, 3);
+    return newPathSegments.join('/');
+  }
+  const path = backWayFunc(location.pathname);
+  let backPath = '';
+  if (searchQuery === null) {
+    backPath = `${path}`;
+  } else {
+    backPath = `${path}?query=${searchQuery}`;
+  }
+  console.log(backPath);
   useEffect(() => {
     const fetchDetails = async () => {
       try {
@@ -58,29 +68,16 @@ const MovieCard = () => {
         </div>
       </div>
       <div className={style.linkBox}>
-        <Link
-          className={style.link}
-          to={`cast?id=${movieID}`}
-          state={{
-            from: query
-              ? `/goit-react-hw-05-movies/search-list?query=${query}`
-              : `/goit-react-hw-05-movies/trend-list`,
-          }}
-        >
+        <Link className={style.link} to={`cast?query=${searchQuery}&id=${movieID}`}>
           Cast
         </Link>
         <Link
           className={style.link}
-          to={`reviews?id=${movieID}`}
-          state={{
-            from: query
-              ? `/goit-react-hw-05-movies/search-list?query=${query}`
-              : `/goit-react-hw-05-movies/trend-list`,
-          }}
+          to={`reviews?query=${searchQuery}&id=${movieID}`}
         >
           Reviews
         </Link>
-        <Link className={style.link} to={backLinkHref}>
+        <Link className={style.link} to={backPath}>
           Back
         </Link>
       </div>

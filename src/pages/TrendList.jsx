@@ -31,7 +31,7 @@ const TrendList = () => {
           <li className={style.item} key={movie.id}>
             <Link
               className={style.link}
-              to={`/goit-react-hw-05-movies/movie?id=${movie.id}`}
+              to={`/goit-react-hw-05-movies/trend-list/movie?id=${movie.id}`}
             >
               <div className={style.movieBox}>
                 <img className={style.img}

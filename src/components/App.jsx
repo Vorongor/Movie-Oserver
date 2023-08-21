@@ -15,8 +15,12 @@ export const App = () => {
         <Route path="/goit-react-hw-05-movies" element={<Header />}>
           <Route index element={<TrendList />} />
           <Route path="trend-list" element={<TrendList />} />
+          <Route path="trend-list/movie" element={<MovieCard />}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
+          </Route>
           <Route path="search-list" element={<SearchList />} />
-          <Route path="movie" element={<MovieCard />}>
+          <Route path="search-list/movie" element={<MovieCard />}>
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />
           </Route>
