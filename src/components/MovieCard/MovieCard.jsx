@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Outlet, useSearchParams, useLocation } from 'react-router-dom';
+import { Link, Outlet, useSearchParams } from 'react-router-dom';
 import { fetchMovieDetails } from '../Fetch/Fetch';
 import style from './MovieCard.module.css';
 
@@ -8,21 +8,13 @@ const MovieCard = () => {
   const [moviesById, setMoviesById] = useState(null);
   const movieID = searchParams.get('id');
   const searchQuery = searchParams.get('query');
-  const location = useLocation();
 
-  function backWayFunc(currentPath) {
-    const pathSegments = currentPath.split('/');
-    const newPathSegments = pathSegments.slice(0, 3);
-    return newPathSegments.join('/');
-  }
-  const path = backWayFunc(location.pathname);
   let backPath = '';
-  if (searchQuery === null) {
-    backPath = `${path}`;
+  if (searchQuery === 'null' ) {
+    backPath = `/`;
   } else {
-    backPath = `${path}?query=${searchQuery}`;
+    backPath = `/movies?query=${searchQuery}`;
   }
-  console.log(backPath);
   useEffect(() => {
     const fetchDetails = async () => {
       try {

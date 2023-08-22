@@ -15,13 +15,13 @@ const Header = () => {
         <nav className={style.nav}>
           <StyledLink
             className={style.link}
-            to="/goit-react-hw-05-movies/trend-list"
+            to="/"
           >
             Trend List
           </StyledLink>
           <StyledLink
             className={style.link}
-            to="/goit-react-hw-05-movies/search-list"
+            to="/movies"
           >
             Search List
           </StyledLink>

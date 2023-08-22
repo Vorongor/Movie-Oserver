@@ -1,32 +1,31 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './Header/Header';
-import TrendList from '../pages/TrendList';
-import SearchList from '../pages/SearchList';
 import NotFound from '../pages/NotFound';
-import MovieCard from './MovieCard/MovieCard';
-import Cast from './Cast/Cast';
-import Reviews from './Reviews/Reviews';
+
+const Home = lazy(() => import('../pages/TrendList'));
+const Movies = lazy(() => import('../pages/SearchList'));
+const MovieDetails = lazy(() => import('./MovieCard/MovieCard'));
+const Cast = lazy(() => import('./Cast/Cast'));
+const Reviews = lazy(() => import('./Reviews/Reviews'));
 
 export const App = () => {
   return (
-    <React.Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div>Loading...</div>}>
       <Routes>
-        <Route path="/goit-react-hw-05-movies" element={<Header />}>
-          <Route index element={<TrendList />} />
-          <Route path="trend-list" element={<TrendList />} />
-          <Route path="trend-list/movie" element={<MovieCard />}>
-            <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Reviews />} />
-          </Route>
-          <Route path="search-list" element={<SearchList />} />
-          <Route path="search-list/movie" element={<MovieCard />}>
+        <Route path="/" element={<Header />}>
+          <Route index element={<Home />} />
+          <Route path="movies" element={<Movies />} />
+          <Route path="movies/:movieId" element={<MovieDetails />}>
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Route>
+        <Route path="/goit-react-hw-05-movies" element={<Header />}>
+          <Route index element={<Home />} />
+        </Route>
       </Routes>
-    </React.Suspense>
+    </Suspense>
   );
 };
