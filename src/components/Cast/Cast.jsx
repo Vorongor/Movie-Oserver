@@ -7,17 +7,17 @@ const Cast = () => {
   const [searchParams] = useSearchParams();
   const [cast, setCast] = useState([]);
   const movieID = searchParams.get('id');
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDetails = async () => {
       try {
         const credits = await fetchMovieCredits(movieID);
         setCast(credits.cast);
-        setLoading(false); // Fetch completed, set loading to false
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching movie details:', error);
-        setLoading(false); // Fetch failed, set loading to false
+        setLoading(false);
       }
     };
 
@@ -25,11 +25,11 @@ const Cast = () => {
   }, [movieID]);
 
   if (loading) {
-    return <div>Loading...</div>; // Show loading message while fetching
+    return <div>Loading...</div>;
   }
 
   if (!cast || cast.length === 0) {
-    return <div>No cast data available.</div>; // Show message for no cast data
+    return <div>No cast data available.</div>;
   }
 
   return (
