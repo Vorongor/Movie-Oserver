@@ -22,9 +22,6 @@ export const App = () => {
           </Route>
           <Route path="*" element={<NotFound />} />
         </Route>
-        <Route path="/goit-react-hw-05-movies" element={<Header />}>
-          <Route index element={<Home />} />
-        </Route>
       </Routes>
     </Suspense>
   );
